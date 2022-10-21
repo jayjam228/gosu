@@ -1,0 +1,22 @@
+{
+  "name": "gosu",
+  "version": "1.0.0",
+  "description": "Gosy Desck",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayjam228/gosu.git"
+  },
+  "author": "jayjam228",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jayjam228/gosu/issues"
+  },
+  "homepage": "https://github.com/jayjam228/gosu#readme",
+  "dependencies": {
+    "Express": "^3.0.1"
+  }
+}
