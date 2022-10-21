@@ -1,6 +1,14 @@
 const express = require('express')
-const path = require('path')
 const app = express()
+const {connect} = require('./core/db/connection')
+app.use(express.json())
+
+connect()
+
+app.get('/api/token', (request, responce) => {
+    let params = {...request.body}
+    responce.status(200).json(params)
+})
 
 app.get('*', (request, responce) => {
     responce.send("asdadaasd")
