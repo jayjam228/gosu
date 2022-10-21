@@ -1,8 +1,13 @@
 const express = require('express')
 const path = require('path')
-const routes = require('./routes/routes')
+const routes = require('./routes/Autorization')
 const app = express()
 const PORT = process.env.PORT || 6000
+const mongoose = require('mongoose')
+const User = require('./core/db/models/user')
+const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv')
+const cors = require("cors")
 
 dotenv.config()
 app.use(cors())
