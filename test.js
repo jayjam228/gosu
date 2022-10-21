@@ -13,8 +13,6 @@ process.env.TOKEN_SECRET
 app.use(cors())
 app.use(express.json())
 
-
-
 const db = 'mongodb://sa:vbnJ456@192.168.31.135:27017/gosudesck?authSource=admin'
 
 mongoose.connect(db)
