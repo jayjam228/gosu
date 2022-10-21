@@ -1,9 +1,7 @@
-
 const jwt = require("jsonwebtoken");
-const User = require("../db/models/user");
 require("dotenv").config(); 
 
-const isLoggedIn = async (req, res, next) => {
+const checkToken = async (req, res, next) => {
   try {
     if (req.headers.authorization) {
       const token = req.header("Authorization").split(" ")[1];
@@ -27,4 +25,4 @@ const isLoggedIn = async (req, res, next) => {
   }
 };
 
-module.exports = isLoggedIn;
+module.exports = checkToken;

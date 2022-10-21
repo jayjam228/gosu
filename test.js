@@ -6,15 +6,12 @@ const User = require('./core/db/models/user')
 const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv')
 const cors = require("cors")
-const isLoggedIn = require('./core/middleware/check_auth')
+const checkToken = require('./core/middleware/check_token_auth')
 
 dotenv.config()
-
 app.use(cors())
 app.use(express.json())
-
 mongoose.connect = require('./core/db/connection')
-
 let currentUser = undefined
 
 const auth = basicAuth({
@@ -42,7 +39,7 @@ app.get('/api/token', auth, async (request, responce) => {
     responce.status(200).json({access_token, refresh_token})
 })
 
-app.post('/api/check', isLoggedIn, async (req, res) => {
+app.post('/api/check', checkToken, async (req, res) => {
     res.status(200).json({...req.user})
 })
 
