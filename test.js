@@ -3,12 +3,12 @@ const basicAuth = require('express-basic-auth')
 const app = express()
 const mongoose = require('mongoose')
 const User = require('./core/db/models/user')
-const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv')
 const cors = require("cors")
 
-dotenv.config();
-process.env.TOKEN_SECRET;
+dotenv.config()
+process.env.TOKEN_SECRET
 
 app.use(cors())
 app.use(express.json())
