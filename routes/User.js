@@ -14,8 +14,9 @@ userService.post('/CreateUser', async (req, res) => {
     })
 })
 
-userService.get('/getListUsers', async (req, res) => {
-    
+userService.post('/getListUsers', async (req, res) => {
+    const user = await User.find({}).lean()
+    res.render('index',{user})
 })
 
 userService.put('/updateUser', async (req, res) => {

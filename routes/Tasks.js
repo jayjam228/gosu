@@ -28,7 +28,7 @@ taksService.get('/getListPage', async (req, res) => {
 
 taksService.post('/getList', async (req, res) => {
     const tasks = await Task.find({}).lean()
-    res.render({tasks})
+    res.render('index',{tasks})
 })
 
 
