@@ -27,10 +27,8 @@ taksService.get('/getListPage', async (req, res) => {
 })
 
 taksService.post('/getList', async (req, res) => {
-    const tasks = await Todo.find({}).lean()
-    res.render('index', {
-        tasks
-    })
+    const tasks = await Task.find({}).lean()
+    res.render({tasks})
 })
 
 

@@ -13,7 +13,7 @@ const cors = require("cors")
 dotenv.config()
 app.use(cors())
 app.use(express.json())
-app.use(routes)
+app.use(express.static(path.join(__dirname, 'routes')))
 mongoose.connect = require('./core/db/connection')
 
 app.listen(PORT, () => {

@@ -1,7 +1,9 @@
-const User = require('./core/db/models/user')
+const User = require('../core/db/models/user')
 const jwt = require('jsonwebtoken')
-const checkToken = require('./core/middleware/check_token_auth')
-
+const checkToken = require('../core/middleware/check_token_auth')
+const basicAuth = require('express-basic-auth')
+const { Router } = require('express')
+const app = Router()
 let currentUser = undefined
 
 const auth = basicAuth({
