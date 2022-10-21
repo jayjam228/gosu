@@ -33,10 +33,13 @@ const auth = basicAuth({
 app.get('/api/token', auth, async (request, responce) => {
     let params = {...request.body}
     currentUser.password = ''
-    const token = await jwt.sign({ user: currentUser }, process.env.SECRET, {
+    const access_token = await jwt.sign({ user: currentUser }, process.env.SECRET, {
       expiresIn: "24h"
     });
-    responce.status(200).json({token})
+    const refresh_token = await jwt.sign({ user: currentUser }, process.env.SECRET, {
+      expiresIn: "365d"
+    });
+    responce.status(200).json({access_token, refresh_token})
 })
 
 app.post('/api/check', isLoggedIn, async (req, res) => {
