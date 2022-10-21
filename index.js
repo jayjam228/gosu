@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
-const routes = require('./routes/Autorization')
+const authService = require('./routes/Autorization')
+const taksService = require('./routes/Tasks')
 const app = express()
 const PORT = process.env.PORT || 6000
 const mongoose = require('mongoose')
@@ -14,7 +15,8 @@ process.env.TOKEN_SECRET
 
 app.use(cors())
 app.use(express.json())
-app.use(routes)
+app.use(authService)
+app.use(taksService)
 
 const db = 'mongodb://sa:vbnJ456@192.168.31.135:27017/gosudesck?authSource=admin'
 mongoose.connect(db)

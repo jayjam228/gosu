@@ -1,45 +1,32 @@
-const router = require('router')
+const { Router } = require('express')
+const taksService = Router()
+
 const Task = require('../core/db/models/task')
 
-router.get('/getTaskPage', async (req, res) => {
+taksService.get('/getTaskPage', async (req, res) => {
     
 })
 
-router.get('/getCompany', async (req, res) => {
+taksService.get('/getCompany', async (req, res) => {
     
 })
 
-router.post('/createTask', async (req, res) => {
-    let task = new Task({
-        title:req.body.title,
-        theme: req.body.theme,
-        contactNumber: req.body.contactNumber,
-        priority: req.body.priority,
-        question: req.body.question,
-        description: req.body.description
-    })
+taksService.post('/createTask', async (req, res) => {
+    let task = new Task({...req.body})
     task.save().then((result) => {
         res.status(200).json(result);
     })
 })
 
-router.get('/addFile', async (req, res) => {
+taksService.get('/addFile', async (req, res) => {
     
 })
 
-router.get('/selectTittle', async (req, res) => {
+taksService.get('/getListPage', async (req, res) => {
     
 })
 
-router.get('/selectPriority', async (req, res) => {
-    
-})
-
-router.get('/getListPage', async (req, res) => {
-    
-})
-
-router.post('/getList', async (req, res) => {
+taksService.post('/getList', async (req, res) => {
     const tasks = await Todo.find({}).lean()
     res.render('index', {
         tasks
@@ -47,18 +34,22 @@ router.post('/getList', async (req, res) => {
 })
 
 
-router.post('/FindTask', async (req, res) => {
-    
+taksService.post('/FindTask', async (req, res) => {
+    const task = await Task.findById(req.body._id)
+    res.status(200).json(task)
 })
 
-router.delete('/deleteTask', async (req, res) => {
-    
+taksService.delete('/deleteTask', async (req, res) => {
+    const task = await Task.findById(req.body._id)
+    task.deleteOne({_id:task._id})
+    res.status(200).json({ok:true})
 })
 
-router.put('/updateTask', async (req, res) => {
-    const task = await Task.findById(req.body.tittle)
-    task.update()
-    task.save().then((result) => {
+taksService.put('/updateTask', async (req, res) => {
+    const task = await Task.findById(req.body._id)
+    task.update({...req.body}).then((result) => {
         res.status(200).json(result);
     })
 })
+
+module.exports = taksService

@@ -1,12 +1,12 @@
 const { Router } = require('express')
-const router = Router()
+const authService = Router()
 
-router.get('/', async (req, res) => {
+authService.get('/', async (req, res) => {
     res.send('get page')
 })
 
-router.post('/autorization', async (req, res) => {
+authService.post('/autorization', async (req, res) => {
     res.send('autorization')
 })
 
-module.exports = router
+module.exports = authService
