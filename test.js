@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const {connect} = require('./core/db/connection')
+const User = require('./core/db/models/user')
+
 app.use(express.json())
 
 connect()
