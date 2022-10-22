@@ -34,6 +34,14 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    contactNumber: {
+        type: String,
+        required: true
+    },
+    company: {
+        type: String,
+        required: true
+    }
 })
 
 const User = mongoose.model('User', userSchema)

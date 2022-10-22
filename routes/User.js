@@ -1,39 +1,44 @@
-const router = require('router')
+const { Router } = require('express')
+const userService = Router()
 const User = require('../core/db/models/user')
 
 
-router.get('/getCreateEmployeePage', async (req, res) => {
+userService.get('/getCreateEmployeePage', async (req, res) => {
     
 })
 
-router.post('/CreateUser', async (req, res) => {
-    const user = new User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        middleName: req.body.middleName,
-        login: req.body.login,
-        password: req.body.password,
-        role: req.body.role,
-        email: req.body.email,
-        telegram_chat_id: req.body.telegram_chat_id
-    })
+userService.post('/CreateUser', async (req, res) => {
+    let user = new User({...req.body})
     user.save().then((result) => {
         res.status(200).json(result);
     })
 })
 
-router.get('/getListUsers', async (req, res) => {
+userService.post('/getListUsers', async (req, res) => {
+    const user = await User.find({}).lean()
+    res.render('index',{user})
+})
+
+userService.put('/updateUser', async (req, res) => {
+    const user = await User.findById(req.body._id)
+    user.update({...req.body}).then((result) => {
+        res.status(200).json(result);
+    })
+})
+
+userService.delete('/deleteUser', async (req, res) => {
+    const user = await User.findById(req.body._id)
+    user.deleteOne({_id:task._id})
+    res.status(200).json({ok:true})
+})
+
+userService.get('/getInviteClientPage', async (req, res) => {
     
 })
 
-router.put('/updateUser', async (req, res) => {
-    
+userService.post('/fimdUser', async (req, res) => {
+    const user = await User.findById(req.body._id)
+    res.status(200).json(user)
 })
 
-router.delete('/deleteUser', async (req, res) => {
-    
-})
-
-router.get('/getInviteClientPage', async (req, res) => {
-    
-})
+module.exports = userService

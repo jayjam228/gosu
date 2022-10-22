@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
-const routes = require('./routes/Autorization')
+const authService = require('./routes/Autorization')
+const taksService = require('./routes/Tasks')
 const app = express()
 const PORT = process.env.PORT || 8890
 const mongoose = require('mongoose')
@@ -12,7 +13,7 @@ const cors = require("cors")
 dotenv.config()
 app.use(cors())
 app.use(express.json())
-app.use(routes)
+app.use(express.static(path.join(__dirname, 'routes')))
 mongoose.connect = require('./core/db/connection')
 
 app.listen(PORT, () => {

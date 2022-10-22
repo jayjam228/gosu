@@ -1,4 +1,3 @@
-const { default: strictTransportSecurity } = require('helmet/dist/types/middlewares/strict-transport-security')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
