@@ -27,8 +27,19 @@ taksService.get('/getListPage', async (req, res) => {
 })
 
 taksService.post('/getList', async (req, res) => {
-    const tasks = await Task.find({}).lean()
-    res.render('index',{tasks})
+    let params = {...req.body}
+    let count = await Task.find().count()
+    let list = await Task.find({})
+    .skip(params.current_page * params.page_size)
+    .limit(params.limit)
+    .exec()
+    
+    res.status(200).json({data:list, 
+        current_page:params.current_page,
+        page_size:params.page_size,
+        page_count: count > 0 ? count/params.page_size : 0,
+        total_count : count
+    })
 })
 
 
