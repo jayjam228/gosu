@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const taksService = Router()
+const checkToken = require('../core/middleware/check_token_auth')
 
 const Task = require('../core/db/models/task')
 
@@ -26,7 +27,7 @@ taksService.get('/getListPage', async (req, res) => {
     
 })
 
-taksService.post('/getList', async (req, res) => {
+taksService.post('/getList', checkToken, async (req, res) => {
     let params = {...req.body}
     let count = await Task.find().count()
     let list = await Task.find({})
