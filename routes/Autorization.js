@@ -1,6 +1,9 @@
-const User = require('./core/db/models/user')
+const User = require('../core/db/models/user')
 const jwt = require('jsonwebtoken')
-const checkToken = require('./core/middleware/check_token_auth')
+const basicAuth = require('express-basic-auth')
+const checkToken = require('../core/middleware/check_token_auth')
+const {Router} = require('express')
+const router = Router()
 
 let currentUser = undefined
 
@@ -17,7 +20,7 @@ const auth = basicAuth({
       authorizeAsync: true,
 })
 
-app.get('/token', auth, async (request, responce) => {
+router.get('/token', auth, async (request, responce) => {
     let params = {...request.body}
     currentUser.password = ''
     const access_token = await jwt.sign({ user: currentUser }, process.env.SECRET, {
@@ -29,6 +32,8 @@ app.get('/token', auth, async (request, responce) => {
     responce.status(200).json({access_token, refresh_token})
 })
 
-app.post('/check', checkToken, async (req, res) => {
+router.post('/check', checkToken, async (req, res) => {
     res.status(200).json({...req.user})
 })
+
+module.exports = router
